@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "alphavantage_quote.json",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
