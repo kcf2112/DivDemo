@@ -13,10 +13,10 @@ struct DivInfo : Identifiable, Codable {
     sharesFormat.numberStyle = .decimal
     sharesFormat.maximumFractionDigits = 2*/
     
-    
     var id = UUID()
     var symbol: String
-    //var payDate: Date
+    //var date: Date
+    //var payDateLabel: String
     var payDate: String
     var dividend: Double
     var shares: Double
@@ -26,5 +26,9 @@ struct DivInfo : Identifiable, Codable {
     
     var formattedShares: String {
         return String( format: "%.2f", shares )
+    }
+    
+    func getDividendPayment( shares: Double ) -> Double {
+        return shares * dividend
     }
 }

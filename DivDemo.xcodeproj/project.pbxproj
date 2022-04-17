@@ -17,11 +17,13 @@
 		5E496E4F2801011000C61482 /* QuoteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E496E4E2801011000C61482 /* QuoteDetailView.swift */; };
 		5E496E5128019FB500C61482 /* basic_quote.json in Resources */ = {isa = PBXBuildFile; fileRef = 5E496E5028019FB500C61482 /* basic_quote.json */; };
 		5E496E532801C79A00C61482 /* AvGlobalQuoteResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E496E522801C79A00C61482 /* AvGlobalQuoteResponse.swift */; };
-		5E4EE937280789D700AEBF98 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4EE936280789D600AEBF98 /* ListViewModel.swift */; };
 		5E4EE93928078CAC00AEBF98 /* Security.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4EE93828078CAC00AEBF98 /* Security.swift */; };
 		5E4EE93B280ADC0F00AEBF98 /* IexCloudAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4EE93A280ADC0F00AEBF98 /* IexCloudAPI.swift */; };
 		5E4EE93D280AEE5B00AEBF98 /* AvCodingKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4EE93C280AEE5B00AEBF98 /* AvCodingKeys.swift */; };
 		5E4EE93F280B4AA900AEBF98 /* FinancialModelingPrepAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4EE93E280B4AA900AEBF98 /* FinancialModelingPrepAPI.swift */; };
+		5E4EE941280C3F3C00AEBF98 /* SecurityListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4EE940280C3F3C00AEBF98 /* SecurityListViewModel.swift */; };
+		5E4EE943280C4AB200AEBF98 /* DividendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4EE942280C4AB200AEBF98 /* DividendViewModel.swift */; };
+		5E4EE945280C8B9000AEBF98 /* DividendQueryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4EE944280C8B9000AEBF98 /* DividendQueryView.swift */; };
 		5E95227D2807761D000E7571 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95227C2807761D000E7571 /* AddView.swift */; };
 		5EB6279127F3CD6500ACAC55 /* DivInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB6279027F3CD6500ACAC55 /* DivInfo.swift */; };
 /* End PBXBuildFile section */
@@ -38,11 +40,13 @@
 		5E496E4E2801011000C61482 /* QuoteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteDetailView.swift; sourceTree = "<group>"; };
 		5E496E5028019FB500C61482 /* basic_quote.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = basic_quote.json; sourceTree = "<group>"; };
 		5E496E522801C79A00C61482 /* AvGlobalQuoteResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvGlobalQuoteResponse.swift; sourceTree = "<group>"; };
-		5E4EE936280789D600AEBF98 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		5E4EE93828078CAC00AEBF98 /* Security.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Security.swift; sourceTree = "<group>"; };
 		5E4EE93A280ADC0F00AEBF98 /* IexCloudAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IexCloudAPI.swift; sourceTree = "<group>"; };
 		5E4EE93C280AEE5B00AEBF98 /* AvCodingKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvCodingKeys.swift; sourceTree = "<group>"; };
 		5E4EE93E280B4AA900AEBF98 /* FinancialModelingPrepAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancialModelingPrepAPI.swift; sourceTree = "<group>"; };
+		5E4EE940280C3F3C00AEBF98 /* SecurityListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityListViewModel.swift; sourceTree = "<group>"; };
+		5E4EE942280C4AB200AEBF98 /* DividendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividendViewModel.swift; sourceTree = "<group>"; };
+		5E4EE944280C8B9000AEBF98 /* DividendQueryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividendQueryView.swift; sourceTree = "<group>"; };
 		5E95227C2807761D000E7571 /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		5EB6279027F3CD6500ACAC55 /* DivInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,6 +109,7 @@
 				5E27411527DE43CB00368784 /* ContentView.swift */,
 				5E496E4E2801011000C61482 /* QuoteDetailView.swift */,
 				5E95227C2807761D000E7571 /* AddView.swift */,
+				5E4EE944280C8B9000AEBF98 /* DividendQueryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -112,7 +117,8 @@
 		5E27412227DE440100368784 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				5E4EE936280789D600AEBF98 /* ListViewModel.swift */,
+				5E4EE940280C3F3C00AEBF98 /* SecurityListViewModel.swift */,
+				5E4EE942280C4AB200AEBF98 /* DividendViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -219,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E4EE93F280B4AA900AEBF98 /* FinancialModelingPrepAPI.swift in Sources */,
+				5E4EE941280C3F3C00AEBF98 /* SecurityListViewModel.swift in Sources */,
 				5E496E532801C79A00C61482 /* AvGlobalQuoteResponse.swift in Sources */,
 				5E496E4F2801011000C61482 /* QuoteDetailView.swift in Sources */,
 				5E4EE93B280ADC0F00AEBF98 /* IexCloudAPI.swift in Sources */,
@@ -226,10 +233,11 @@
 				5E4EE93928078CAC00AEBF98 /* Security.swift in Sources */,
 				5E496E4D27FF8A6800C61482 /* AlphavantageAPI.swift in Sources */,
 				5E95227D2807761D000E7571 /* AddView.swift in Sources */,
-				5E4EE937280789D700AEBF98 /* ListViewModel.swift in Sources */,
+				5E4EE943280C4AB200AEBF98 /* DividendViewModel.swift in Sources */,
 				5E4EE93D280AEE5B00AEBF98 /* AvCodingKeys.swift in Sources */,
 				5E27412927DE48F200368784 /* Quote.swift in Sources */,
 				5E27411427DE43CB00368784 /* DivDemoApp.swift in Sources */,
+				5E4EE945280C8B9000AEBF98 /* DividendQueryView.swift in Sources */,
 				5EB6279127F3CD6500ACAC55 /* DivInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

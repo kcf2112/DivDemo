@@ -45,9 +45,41 @@ struct QuoteDetailView: View {
             
         do {
             let (data, _) = try await URLSession.shared.data( from: url )
-            if let decodedResponse = try? JSONDecoder().decode( [Quote].self, from: data ) {
-                print( "decodedResponse: \(decodedResponse[0])" )
-                quotes.append( decodedResponse[0] )
+            if let decoded = try? JSONDecoder().decode( [Quote].self, from: data ) {
+                if decoded.isEmpty {
+                    print( "decodedResponse: No Data" )
+                    quotes.append( Quote( symbol: self.symbol) )
+                }
+                else {
+                    print( "decodedResponse: \(decoded[0])" )
+                    quotes.append( decoded[0] )
+                }
+            }
+        }
+        catch {
+            fatalError( "Could not retrieve data" );
+        }
+    }
+    
+    func loadQuote_SAVE() async {
+        let targetUrl = FinancialModelingPrepAPI.quoteUrl( for: symbol )
+        print( "targetUrl: \(targetUrl)" )
+        
+        guard let url = URL( string: targetUrl ) else {
+            fatalError( "Could not create URL from \(targetUrl)" );
+        }
+            
+        do {
+            let (data, _) = try await URLSession.shared.data( from: url )
+            if let decoded = try? JSONDecoder().decode( [Quote].self, from: data ) {
+                if decoded.isEmpty {
+                    print( "decodedResponse: No Data" )
+                    quotes.append( Quote( symbol: self.symbol) )
+                }
+                else {
+                    print( "decodedResponse: \(decoded[0])" )
+                    quotes.append( decoded[0] )
+                }
             }
         }
         catch {

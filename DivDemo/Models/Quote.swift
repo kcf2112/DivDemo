@@ -51,12 +51,12 @@ import Foundation
  */
 struct Quote: Codable {
     var symbol: String
-    var open: Double
-    var high: Double
-    var low: Double
-    var price: Double
-    var change: Double
-    var changePercent: Double
+    var open: Double = 0.0
+    var high: Double = 0.0
+    var low: Double = 0.0
+    var price: Double = 0.0
+    var change: Double = 0.0
+    var changePercent: Double = 0.0
     
     // If this enum is present, ONLY these fields will
     // be decoded.  The enum must contain all needed field.
@@ -69,6 +69,10 @@ struct Quote: Codable {
         case price = "price"
         case change = "change"
         case changePercent = "changesPercentage"
+    }
+    
+    init( symbol: String ) {
+        self.symbol = symbol
     }
 
     /*

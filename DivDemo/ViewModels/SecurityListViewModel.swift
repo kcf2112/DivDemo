@@ -1,13 +1,17 @@
 //
-//  ListViewModel.swift
+//  StockListViewModel.swift
 //  DivDemo
 //
-//  Created by Kevin Filer on 4/13/22.
+//  Created by Kevin Filer on 4/17/22.
 //
 
 import Foundation
 
-class ListViewModel : ObservableObject {
+/*
+ Provides data handling for a list of securities maintained
+ by the user -- stocks, mutual funds, ETFs.
+ */
+class SecurityListViewModel : ObservableObject {
     
     @Published var securities: [Security] = [] {
         didSet {
@@ -40,7 +44,7 @@ class ListViewModel : ObservableObject {
     }
     
     func moveSecurity( from: IndexSet, to: Int ) {
-        securities.move( fromOffsets: from, toOffset: to ) 
+        securities.move( fromOffsets: from, toOffset: to )
     }
     
     func saveSecurities() {
