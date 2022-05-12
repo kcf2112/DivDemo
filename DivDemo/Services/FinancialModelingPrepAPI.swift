@@ -18,23 +18,25 @@ struct FinancialModelingPrepAPI {
     }()
     
     enum SearchFunction: String {
-        case dividend = "stock_dividend_calendar"
+        case dividend = "key-metrics-ttm"
         case quote = "quote"
         case search = "--SYMBOL_SEARCH--"
     }
     
-    
     /*
-     Query URL for dividend payment history.
+     Query URL for trailing 12 months (TTM) dividend payment.
      */
-    static func dividendUrl( for equitySymbol: String, fromDate: Date, toDate: Date ) -> String {
+    static func dividendTtmUrl( for equitySymbol: String ) -> String {
+        return urlBy( searchMode: .dividend, searchTerm: equitySymbol, dates: [] )
+    }
+    
+    static func dividendUrl_TEST( for equitySymbol: String, fromDate: Date, toDate: Date ) -> String {
         var dateStr: [String] = []
         dateStr.append( dateFormat.string( from: fromDate ) )
         dateStr.append( dateFormat.string( from: toDate ) )
-        return urlBy( searchMode: .quote, searchTerm: equitySymbol, dates: dateStr )
+        return urlBy( searchMode: .dividend, searchTerm: equitySymbol, dates: dateStr )
     }
 
-    
     /*
      Query URL for price quote info on a specific known equity/security.
      */
@@ -50,12 +52,12 @@ struct FinancialModelingPrepAPI {
     }
     
     /*
-     Uses search mode (SearchFunction enum) to build the right query URL.
+     Uses search mode (SearchFunction enum) to build the query URL.
      */
     private static func urlBy( searchMode: SearchFunction, searchTerm: String, dates: [String] ) -> String {
         switch searchMode {
         case .dividend :
-            return "\(baseUrl)/\(searchMode.rawValue)/\(searchTerm)?from=\(dates[0])&to=\(dates[1])&apikey=\(key)"
+            return "\(baseUrl)/\(searchMode.rawValue)/\(searchTerm)?limit=40&apikey=\(key)"
         case .quote :
             return "\(baseUrl)/\(searchMode.rawValue)/\(searchTerm)?apikey=\(key)"
         case .search :

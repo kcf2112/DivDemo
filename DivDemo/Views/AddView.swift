@@ -17,20 +17,21 @@ struct AddView: View {
 
     @State var alertTitle = ""
     @State var showAlert = false
-    var numShares = 0.0
+    var numShares: Double = 0.0
     
     var body: some View {
         ScrollView {
             VStack {
                 TextField( "Ticker symbol", text: $symbol )
+                    .textCase( .uppercase )
                     .padding( .horizontal )
                     .frame( height: 55 )
-                    .background( Color( red: 0.789, green: 0.831, blue: 0.841)  )
+                    //.background( Color( red: 0.789, green: 0.831, blue: 0.841)  )
                     .cornerRadius( 10 )
                 TextField( "Number of shares", text: $shares )
                     .padding( .horizontal )
                     .frame( height: 55 )
-                    .background( Color( red: 0.789, green: 0.831, blue: 0.841)  )
+                    //.background( Color( red: 0.789, green: 0.831, blue: 0.841)  )
                     .cornerRadius( 10 )
                 Button(
                     action: onSave,
@@ -54,12 +55,26 @@ struct AddView: View {
             return
         }
         let numShares = Double( shares ) ?? 0.0
-        securityListViewModel.addSecurity( symbol: symbol, shares: numShares )
+        securityListViewModel.add( symbol: symbol, shares: numShares )
         presentationMode.wrappedValue.dismiss() // Go back in hierarchy.
     }
     
     func isValid() -> Bool {
-        // TODO: Add validation logic or remove this.
+        if symbol.count < 1 {
+            alertTitle = "Please enter a ticker symbol."
+            showAlert.toggle()
+            return false
+        }
+        if securityListViewModel.hasSymbol( symbol ) {
+            alertTitle = "\(symbol) is already present."
+            showAlert.toggle()
+            return false
+        }
+        if shares.count < 1 {
+            alertTitle = "Please enter number of shares (more than 0)"
+            showAlert.toggle()
+            return false
+        }
         return true
     }
     

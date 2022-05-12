@@ -7,28 +7,34 @@
 
 import Foundation
 
-struct DivInfo : Identifiable, Codable {
+struct DivInfo : Codable {
     
-    /*let sharesFormat = NumberFormatter()
-    sharesFormat.numberStyle = .decimal
-    sharesFormat.maximumFractionDigits = 2*/
+    var dividendYieldTTM: Double = 0.0
+    var dividendYieldPercentageTTM: Double = 0.0
+    var dividendPerShareTTM: Double = 0.0
     
-    var id = UUID()
-    var symbol: String
-    //var date: Date
-    //var payDateLabel: String
-    var payDate: String
-    var dividend: Double
-    var shares: Double
-    var paid: Double {
-        get { shares * dividend }
-    }
+    var shares: Double = 0.0
     
     var formattedShares: String {
         return String( format: "%.2f", shares )
     }
     
-    func getDividendPayment( shares: Double ) -> Double {
-        return shares * dividend
+    // If this enum is present, ONLY these fields will
+    // be decoded.  The enum must contain all needed fields.
+    // FMP version:
+    private enum CodingKeys: String, CodingKey {
+        case dividendYieldTTM = "dividendYieldTTM"
+        case dividendYieldPercentageTTM = "dividendYieldPercentageTTM"
+        case dividendPerShareTTM = "dividendPerShareTTM"
+    }
+    
+    func getDividendPaidTTM( shares: Double ) -> Double {
+        return shares * dividendPerShareTTM
+    }
+}
+
+extension DivInfo: Identifiable {
+    var id: UUID {
+        return UUID()
     }
 }

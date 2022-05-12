@@ -16,7 +16,7 @@ struct ContentView: View {
             List {
                 ForEach( securityListViewModel.securities ) { sec in
                     NavigationLink {
-                        QuoteDetailView( symbol: sec.symbol );
+                        SymbolDetailView( symbol: sec.symbol );
                     } label: {
                         VStack( alignment: .leading ) {
                             Text( "\(sec.symbol)" )
@@ -26,12 +26,17 @@ struct ContentView: View {
                         .frame( width: 220 )
                     }
                 }
+                .onDelete( perform: deleteItem )
             }
             .navigationTitle( "Div Demo" )
             .navigationBarItems(
                 trailing: NavigationLink(
                     "Add", destination: AddView( securityListViewModel: securityListViewModel ) ) )
         }
+    }
+    
+    func deleteItem( at indexSet: IndexSet ) {
+        securityListViewModel.delete( indexSet: indexSet )
     }
 }
 

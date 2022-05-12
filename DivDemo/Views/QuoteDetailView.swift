@@ -36,8 +36,8 @@ struct QuoteDetailView: View {
     }
     
     func loadQuote() async {
+        quotes.removeAll()
         let targetUrl = FinancialModelingPrepAPI.quoteUrl( for: symbol )
-        print( "targetUrl: \(targetUrl)" )
         
         guard let url = URL( string: targetUrl ) else {
             fatalError( "Could not create URL from \(targetUrl)" );

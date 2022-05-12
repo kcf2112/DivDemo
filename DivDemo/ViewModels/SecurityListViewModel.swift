@@ -14,6 +14,7 @@ import Foundation
 class SecurityListViewModel : ObservableObject {
     
     @Published var securities: [Security] = [] {
+        // Save the updated list when user makes a change.
         didSet {
             saveSecurities()
         }
@@ -25,12 +26,21 @@ class SecurityListViewModel : ObservableObject {
         getSecurities()
     }
     
-    func addSecurity( symbol: String, shares: Double ) {
+    func add( symbol: String, shares: Double ) {
         securities.append( Security( symbol: symbol, shares: shares ) )
     }
     
-    func deleteSecurity( indexSet: IndexSet ) {
+    func delete( indexSet: IndexSet ) {
         securities.remove( atOffsets: indexSet )
+    }
+    
+    func hasSymbol( _ symbol: String ) -> Bool {
+        for item in securities {
+            if symbol == item.symbol {
+                return true
+            }
+        }
+        return false
     }
     
     func getSecurities() {

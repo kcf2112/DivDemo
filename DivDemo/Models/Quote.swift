@@ -59,7 +59,7 @@ struct Quote: Codable {
     var changePercent: Double = 0.0
     
     // If this enum is present, ONLY these fields will
-    // be decoded.  The enum must contain all needed field.
+    // be decoded.  The enum must contain all needed fields.
     // FMP version:
     private enum CodingKeys: String, CodingKey {
         case symbol = "symbol"
