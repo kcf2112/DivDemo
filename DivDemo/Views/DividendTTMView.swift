@@ -9,17 +9,19 @@ import SwiftUI
 
 struct DividendTTMView: View {
     @State private var divData = [DivInfo]()
-    var symbol: String
-    let format = "%.6f"
-    
+    var security: Security
+    let longFmt = "%.6f"
+    let shortFmt = "%.2f"
+
     var body: some View {
-        Text( "\(symbol) Dividend Trailing 12 Months (TTM)" )
+        Text( "\(security.symbol) Dividend Trailing 12 Months (TTM)" )
             .font( .headline )
         List( divData ) { div in
             VStack( alignment: .leading ) {
-                Text( "Dividend Yield TTM: \(div.dividendYieldTTM, specifier: format)" )
-                Text( "Dividend Yield % TTM: \(div.dividendYieldPercentageTTM, specifier: format)" )
-                Text( "Dividend PerShare TTM: \(div.dividendPerShareTTM, specifier: format)" )
+                Text( "Dividend Yield TTM: \(div.dividendYieldTTM, specifier: longFmt)" )
+                Text( "Dividend Yield % TTM: \(div.dividendYieldPercentageTTM, specifier: longFmt)" )
+                Text( "Dividend PerShare TTM: \(div.dividendPerShareTTM, specifier: longFmt)" )
+                Text( "Dividend Total TTM: \(div.getDividendPaidTTM( shares: security.shares ), specifier: shortFmt)" )
             }
         }
         .task {
@@ -27,13 +29,13 @@ struct DividendTTMView: View {
         }
     }
     
-    init( symbol: String ) {
-        self.symbol = symbol
+    init( security: Security ) {
+        self.security = security
     }
     
     func loadDividend() async {
         divData.removeAll()
-        let targetUrl = FinancialModelingPrepAPI.dividendTtmUrl( for: symbol )
+        let targetUrl = FinancialModelingPrepAPI.dividendTtmUrl( for: security.symbol )
         print( "DividendTTMView targetUrl: \(targetUrl)" )
         
         guard let url = URL( string: targetUrl ) else {
@@ -67,6 +69,6 @@ struct DividendTTMView: View {
 
 struct DividendTTMView_Previews: PreviewProvider {
     static var previews: some View {
-        DividendTTMView( symbol: "AAPL" )
+        DividendTTMView( security: Security( symbol: "AAPL", shares: 1000 ) )
     }
 }

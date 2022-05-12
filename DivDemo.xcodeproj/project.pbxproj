@@ -26,7 +26,7 @@
 		5E4EE945280C8B9000AEBF98 /* DividendQueryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4EE944280C8B9000AEBF98 /* DividendQueryView.swift */; };
 		5E95227D2807761D000E7571 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E95227C2807761D000E7571 /* AddView.swift */; };
 		5EB6279127F3CD6500ACAC55 /* DivInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB6279027F3CD6500ACAC55 /* DivInfo.swift */; };
-		5EE22696282C6D4D003CF46F /* SymbolDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE22695282C6D4D003CF46F /* SymbolDetailView.swift */; };
+		5EE22696282C6D4D003CF46F /* SecurityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE22695282C6D4D003CF46F /* SecurityDetailView.swift */; };
 		5EE22698282C7236003CF46F /* DividendTTMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE22697282C7236003CF46F /* DividendTTMView.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,7 +51,7 @@
 		5E4EE944280C8B9000AEBF98 /* DividendQueryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividendQueryView.swift; sourceTree = "<group>"; };
 		5E95227C2807761D000E7571 /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		5EB6279027F3CD6500ACAC55 /* DivInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DivInfo.swift; sourceTree = "<group>"; };
-		5EE22695282C6D4D003CF46F /* SymbolDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolDetailView.swift; sourceTree = "<group>"; };
+		5EE22695282C6D4D003CF46F /* SecurityDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityDetailView.swift; sourceTree = "<group>"; };
 		5EE22697282C7236003CF46F /* DividendTTMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividendTTMView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,7 +114,7 @@
 				5E496E4E2801011000C61482 /* QuoteDetailView.swift */,
 				5E95227C2807761D000E7571 /* AddView.swift */,
 				5E4EE944280C8B9000AEBF98 /* DividendQueryView.swift */,
-				5EE22695282C6D4D003CF46F /* SymbolDetailView.swift */,
+				5EE22695282C6D4D003CF46F /* SecurityDetailView.swift */,
 				5EE22697282C7236003CF46F /* DividendTTMView.swift */,
 			);
 			path = Views;
@@ -236,7 +236,7 @@
 				5EE22698282C7236003CF46F /* DividendTTMView.swift in Sources */,
 				5E496E4F2801011000C61482 /* QuoteDetailView.swift in Sources */,
 				5E4EE93B280ADC0F00AEBF98 /* IexCloudAPI.swift in Sources */,
-				5EE22696282C6D4D003CF46F /* SymbolDetailView.swift in Sources */,
+				5EE22696282C6D4D003CF46F /* SecurityDetailView.swift in Sources */,
 				5E27411627DE43CB00368784 /* ContentView.swift in Sources */,
 				5E4EE93928078CAC00AEBF98 /* Security.swift in Sources */,
 				5E496E4D27FF8A6800C61482 /* AlphavantageAPI.swift in Sources */,

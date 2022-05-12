@@ -16,7 +16,7 @@ struct ContentView: View {
             List {
                 ForEach( securityListViewModel.securities ) { sec in
                     NavigationLink {
-                        SymbolDetailView( symbol: sec.symbol );
+                        SecurityDetailView( security: sec );
                     } label: {
                         VStack( alignment: .leading ) {
                             Text( "\(sec.symbol)" )

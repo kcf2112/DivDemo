@@ -7,25 +7,25 @@
 
 import SwiftUI
 
-struct SymbolDetailView: View {
-    var symbol: String
+struct SecurityDetailView: View {
+    var security: Security
     
     var body: some View {
         VStack( alignment: .leading ) {
-            //QuoteDetailView( symbol: symbol )
-            DividendTTMView( symbol: symbol )
+            QuoteDetailView( security: security )
+            DividendTTMView( security: security )
         }
         .padding()
     }
     
-    init( symbol: String ) {
-        self.symbol = symbol
+    init( security: Security ) {
+        self.security = security
     }
 
 }
 
 struct SymbolDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        SymbolDetailView( symbol: "AAPL" )
+        SecurityDetailView( security: Security( symbol: "DVY", shares: 1000 ) )
     }
 }

@@ -10,11 +10,11 @@ import SwiftUI
 struct QuoteDetailView: View {
     
     @State private var quotes = [Quote]()
-    var symbol: String
+    var security: Security
     let format = "%.2F"
     
     var body: some View {
-        Text( "\(symbol) Quote Detail" )
+        Text( "\(security.symbol) Quote Detail" )
             .font( .headline )
         List( quotes ) { quote in
             VStack( alignment: .leading ) {
@@ -31,13 +31,13 @@ struct QuoteDetailView: View {
         }
     }
     
-    init( symbol: String ) {
-        self.symbol = symbol
+    init( security: Security ) {
+        self.security = security
     }
     
     func loadQuote() async {
         quotes.removeAll()
-        let targetUrl = FinancialModelingPrepAPI.quoteUrl( for: symbol )
+        let targetUrl = FinancialModelingPrepAPI.quoteUrl( for: security.symbol )
         
         guard let url = URL( string: targetUrl ) else {
             fatalError( "Could not create URL from \(targetUrl)" );
@@ -48,7 +48,7 @@ struct QuoteDetailView: View {
             if let decoded = try? JSONDecoder().decode( [Quote].self, from: data ) {
                 if decoded.isEmpty {
                     print( "decodedResponse: No Data" )
-                    quotes.append( Quote( symbol: self.symbol) )
+                    quotes.append( Quote( symbol: self.security.symbol) )
                 }
                 else {
                     print( "decodedResponse: \(decoded[0])" )
@@ -62,7 +62,7 @@ struct QuoteDetailView: View {
     }
     
     func loadQuote_SAVE() async {
-        let targetUrl = FinancialModelingPrepAPI.quoteUrl( for: symbol )
+        let targetUrl = FinancialModelingPrepAPI.quoteUrl( for: security.symbol )
         print( "targetUrl: \(targetUrl)" )
         
         guard let url = URL( string: targetUrl ) else {
@@ -74,7 +74,7 @@ struct QuoteDetailView: View {
             if let decoded = try? JSONDecoder().decode( [Quote].self, from: data ) {
                 if decoded.isEmpty {
                     print( "decodedResponse: No Data" )
-                    quotes.append( Quote( symbol: self.symbol) )
+                    quotes.append( Quote( symbol: self.security.symbol) )
                 }
                 else {
                     print( "decodedResponse: \(decoded[0])" )
@@ -108,6 +108,6 @@ struct QuoteDetailView: View {
 
 struct QuoteDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        QuoteDetailView( symbol: "ABC" )
+        QuoteDetailView( security: Security( symbol: "ABC", shares: 1000 ) )
     }
 }
