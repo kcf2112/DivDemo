@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DividendTTMView: View {
     //@State private var divData = [DivInfo]()
-    @ObservedObject var divViewModel = DividendViewModel()
+    @StateObject var divViewModel = DividendViewModel()
     
     var div = DivInfo()
     

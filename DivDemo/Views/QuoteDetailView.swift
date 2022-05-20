@@ -9,8 +9,7 @@ import SwiftUI
 
 struct QuoteDetailView: View {
     
-    @State private var quotes = [Quote]()
-    @State private var quote = Quote( symbol: "UNKNOWN" )
+    @StateObject var quoteViewModel = QuoteViewModel()
     
     var security: Security
     let format = "%.2F"
@@ -21,96 +20,22 @@ struct QuoteDetailView: View {
         //List( quotes ) { quote in
         List {
             VStack( alignment: .leading ) {
-                Text( "High: \(quote.high, specifier: format)" )
-                Text( "Low: \(quote.low, specifier: format)" )
-                Text( "Close: \(quote.price, specifier: format)" ).bold()
-                Text( "Change: \(quote.change, specifier: format)" )
-                Text( "% Chg: \(quote.changePercent)" )
-                    .foregroundColor( quote.changePercent < 1 ? .red : .green )
+                Text( "High: \(quoteViewModel.quote.high, specifier: format)" )
+                Text( "Low: \(quoteViewModel.quote.low, specifier: format)" )
+                Text( "Close: \(quoteViewModel.quote.price, specifier: format)" ).bold()
+                Text( "Change: \(quoteViewModel.quote.change, specifier: format)" )
+                Text( "% Chg: \(quoteViewModel.quote.changePercent)" )
+                    .foregroundColor( quoteViewModel.quote.changePercent < 1 ? .red : .green )
             }
         }
         .task {
-            await loadQuote()
+            await quoteViewModel.loadQuote( security: security )
         }
     }
     
     init( security: Security ) {
         self.security = security
-    }
-    
-    func loadQuote() async {
-        quotes.removeAll()
-        let targetUrl = FinancialModelingPrepAPI.quoteUrl( for: security.symbol )
-        print( "QuoteDetailView targetUrl: \(targetUrl)" )
-        
-        guard let url = URL( string: targetUrl ) else {
-            fatalError( "Could not create URL from \(targetUrl)" );
-        }
-            
-        do {
-            let (data, _) = try await URLSession.shared.data( from: url )
-            
-            if let decoded = try? JSONDecoder().decode( [Quote].self, from: data ) {
-                if decoded.isEmpty {
-                    print( "decodedResponse: No Data" )
-                    //quotes.append( Quote( symbol: self.security.symbol) )
-                    quote = Quote( symbol: self.security.symbol )
-                }
-                else {
-                    print( "decodedResponse: \(decoded[0])" )
-                    quote = decoded[0]
-                }
-            }
-            
-        }
-        catch {
-            fatalError( "Could not retrieve data" );
-        }
-    }
-    
-    func loadQuote_SAVE() async {
-        let targetUrl = FinancialModelingPrepAPI.quoteUrl( for: security.symbol )
-        print( "targetUrl: \(targetUrl)" )
-        
-        guard let url = URL( string: targetUrl ) else {
-            fatalError( "Could not create URL from \(targetUrl)" );
-        }
-            
-        do {
-            let (data, _) = try await URLSession.shared.data( from: url )
-            if let decoded = try? JSONDecoder().decode( [Quote].self, from: data ) {
-                if decoded.isEmpty {
-                    print( "decodedResponse: No Data" )
-                    quotes.append( Quote( symbol: self.security.symbol) )
-                }
-                else {
-                    print( "decodedResponse: \(decoded[0])" )
-                    quotes.append( decoded[0] )
-                }
-            }
-        }
-        catch {
-            fatalError( "Could not retrieve data" );
-        }
-    }
-    
-    func loadQuoteFromFile() async {
-        let file = "basic_quote.json"
-        
-        guard let url =
-                Bundle.main.url( forResource: file, withExtension: nil ) else {
-            fatalError( "Could not find \(file) in bundle." );
-        }
-        
-        guard let data = try? Data( contentsOf: url ) else {
-            fatalError( "Could not load \(file) from bundle." );
-        }
-        
-        guard let quote = try? JSONDecoder().decode( Quote.self, from: data ) else {
-            fatalError( "Could not decode \(file) from bundle." );
-        }
-        quotes.append( quote )
-    }
+    }    
 }
 
 struct QuoteDetailView_Previews: PreviewProvider {

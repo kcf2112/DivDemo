@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 class DividendViewModel : ObservableObject {
     
     @Published var divInfo = DivInfo()
@@ -21,8 +22,6 @@ class DividendViewModel : ObservableObject {
             
         do {
             let (data, _) = try await URLSession.shared.data( from: url )
-            //print( "DividendViewModel data: \(data)" )
-            
             if let decoded = try? JSONDecoder().decode( [DivInfo].self, from: data ) {
                 //print( "DividendViewModel decodedResponse: \(decoded[0])" )
                 if decoded.isEmpty {
