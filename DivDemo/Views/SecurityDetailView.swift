@@ -21,11 +21,10 @@ struct SecurityDetailView: View {
     init( security: Security ) {
         self.security = security
     }
-
 }
 
 struct SymbolDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        SecurityDetailView( security: Security( symbol: "DVY", shares: 1000 ) )
+        SecurityDetailView( security: Security( symbol: "DVY", dollarAmount: 10000 ) )
     }
 }

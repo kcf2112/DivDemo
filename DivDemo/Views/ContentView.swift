@@ -20,7 +20,7 @@ struct ContentView: View {
                     } label: {
                         VStack( alignment: .leading ) {
                             Text( "\(sec.symbol)" )
-                            Text( "Shares: \(sec.shares)" )
+                            Text( "$ Amount: \(sec.dollarAmount)" )
                         }
                         .padding()
                         .frame( width: 220 )

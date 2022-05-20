@@ -13,5 +13,6 @@ import Foundation
 struct Security : Identifiable, Codable {
     var id = UUID()
     var symbol: String
-    var shares: Double
+    var dollarAmount: Int
+    //var shares: Double
 }

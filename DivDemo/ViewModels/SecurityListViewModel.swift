@@ -26,10 +26,14 @@ class SecurityListViewModel : ObservableObject {
         getSecurities()
     }
     
-    func add( symbol: String, shares: Double ) {
-        securities.append( Security( symbol: symbol, shares: shares ) )
+    func add( symbol: String, dollarAmount: Int ) {
+        securities.append( Security( symbol: symbol, dollarAmount: dollarAmount ) )
     }
-    
+    /*
+    func addByShares( symbol: String, shares: Double ) {
+        securities.append( Security( symbol: symbol, shares: shares ) )
+    }*/
+
     func delete( indexSet: IndexSet ) {
         securities.remove( atOffsets: indexSet )
     }

@@ -57,6 +57,7 @@ struct Quote: Codable {
     var price: Double = 0.0
     var change: Double = 0.0
     var changePercent: Double = 0.0
+    var timestamp: Int = 0
     
     // If this enum is present, ONLY these fields will
     // be decoded.  The enum must contain all needed fields.
@@ -69,6 +70,7 @@ struct Quote: Codable {
         case price = "price"
         case change = "change"
         case changePercent = "changesPercentage"
+        case timestamp = "timestamp"
     }
     
     init( symbol: String ) {
@@ -103,5 +105,11 @@ struct Quote: Codable {
 extension Quote: Identifiable {
     var id: UUID {
         return UUID()
+    }
+    
+    var formattedQuoteDate: String {
+        //let epochTime = TimeInterval( timestamp )
+        let date = Date( timeIntervalSince1970: TimeInterval( timestamp ) )
+        return date.formatted( date: .abbreviated, time: .omitted )
     }
 }

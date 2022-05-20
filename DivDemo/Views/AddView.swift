@@ -14,6 +14,7 @@ struct AddView: View {
 
     @State var symbol: String = ""
     @State var shares: String = ""
+    @State var dollarAmt: Int = 0
 
     @State var alertTitle = ""
     @State var showAlert = false
@@ -28,11 +29,18 @@ struct AddView: View {
                     .frame( height: 55 )
                     //.background( Color( red: 0.789, green: 0.831, blue: 0.841)  )
                     .cornerRadius( 10 )
+                TextField( "Dollar Amount", value: $dollarAmt, format: .number )
+                    .padding( .horizontal )
+                    .frame( height: 55 )
+                    //.background( Color( red: 0.789, green: 0.831, blue: 0.841)  )
+                    .cornerRadius( 10 )
+                /*
                 TextField( "Number of shares", text: $shares )
                     .padding( .horizontal )
                     .frame( height: 55 )
                     //.background( Color( red: 0.789, green: 0.831, blue: 0.841)  )
                     .cornerRadius( 10 )
+                 */
                 Button(
                     action: onSave,
                     label: {
@@ -54,8 +62,8 @@ struct AddView: View {
         if !isValid() {
             return
         }
-        let numShares = Double( shares ) ?? 0.0
-        securityListViewModel.add( symbol: symbol, shares: numShares )
+        //let numShares = Double( shares ) ?? 0.0
+        securityListViewModel.add( symbol: symbol, dollarAmount: dollarAmt )
         presentationMode.wrappedValue.dismiss() // Go back in hierarchy.
     }
     
@@ -70,11 +78,16 @@ struct AddView: View {
             showAlert.toggle()
             return false
         }
-        if shares.count < 1 {
-            alertTitle = "Please enter number of shares (more than 0)"
+        if dollarAmt < 1 {
+            alertTitle = "Please enter dollar amount (more than 0)"
             showAlert.toggle()
             return false
         }
+        /*if shares.count < 1 {
+            alertTitle = "Please enter number of shares (more than 0)"
+            showAlert.toggle()
+            return false
+        }*/
         return true
     }
     
