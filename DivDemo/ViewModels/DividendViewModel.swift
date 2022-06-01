@@ -13,6 +13,11 @@ class DividendViewModel : ObservableObject {
     @Published var divInfo = DivInfo()
     
     func loadDividend( security: Security ) async {
+        
+        // TODO:
+        // @MainActor vs await MainActor.run( body: { <async code here> } )
+        //
+        
         let targetUrl = FinancialModelingPrepAPI.dividendTtmUrl( for: security.symbol )
         print( "DividendTTMView targetUrl: \(targetUrl)" )
         
@@ -25,7 +30,7 @@ class DividendViewModel : ObservableObject {
             if let decoded = try? JSONDecoder().decode( [DivInfo].self, from: data ) {
                 //print( "DividendViewModel decodedResponse: \(decoded[0])" )
                 if decoded.isEmpty {
-                    //print( "DividendViewModel decodedResponse: No Data" )
+                    //print( "DividendViewModel decodedResponse: No data returned for \(security.symbol" )
                     divInfo = DivInfo()
                 }
                 else {
