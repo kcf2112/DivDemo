@@ -11,7 +11,7 @@ struct DividendTTMView: View {
     //@State private var divData = [DivInfo]()
     @StateObject var divViewModel = DividendViewModel()
     
-    var div = DivInfo()
+    var div = DividendTTM()
     
     var security: Security
     let longFmt = "%.6f"

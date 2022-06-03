@@ -16,26 +16,13 @@ class QuoteViewModel : ObservableObject {
         let targetUrl = FinancialModelingPrepAPI.quoteUrl( for: security.symbol )
         print( "QuoteDetailView targetUrl: \(targetUrl)" )
         
-        guard let url = URL( string: targetUrl ) else {
-            fatalError( "Could not create URL from \(targetUrl)" );
-        }
-            
+        let httpService = HttpService<Quote>( urlString: targetUrl )
         do {
-            let (data, _) = try await URLSession.shared.data( from: url )
-            
-            if let decoded = try? JSONDecoder().decode( [Quote].self, from: data ) {
-                if decoded.isEmpty {
-                    //print( "decodedResponse: No data returned for \(security.symbol" )
-                    quote = Quote( symbol: security.symbol )
-                }
-                else {
-                    //print( "decodedResponse: \(decoded[0])" )
-                    quote = decoded[0]
-                }
-            }
+            quote = try await httpService.getJSON()
         }
         catch {
-            fatalError( "Could not retrieve data" );
+            // TODO: Post error for user
+            fatalError( "Could not retrieve DividendTTM data: \(error.localizedDescription)" );
         }
     }
     

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DivInfo : Codable {
+struct DividendTTM : Codable {
     
     var dividendYieldTTM: Double = 0.0
     var dividendYieldPercentageTTM: Double = 0.0
@@ -33,7 +33,7 @@ struct DivInfo : Codable {
     }
 }
 
-extension DivInfo: Identifiable {
+extension DividendTTM: Identifiable {
     var id: UUID {
         return UUID()
     }
