@@ -19,6 +19,7 @@ struct FinancialModelingPrepAPI {
     
     enum SearchFunction: String {
         case dividend = "key-metrics-ttm"
+        case profile = "profile"
         case quote = "quote"
         case search = "--SYMBOL_SEARCH--"
     }
@@ -37,6 +38,13 @@ struct FinancialModelingPrepAPI {
         return urlBy( searchMode: .dividend, searchTerm: equitySymbol, dates: dateStr )
     }
 
+    /*
+     Query URL for company profile information.
+     */
+    static func profileUrl( for equitySymbol: String ) -> String {
+        return urlBy( searchMode: .profile, searchTerm: equitySymbol, dates: [] )
+    }
+    
     /*
      Query URL for price quote info on a specific known equity/security.
      */
@@ -58,7 +66,8 @@ struct FinancialModelingPrepAPI {
         switch searchMode {
         case .dividend :
             return "\(baseUrl)/\(searchMode.rawValue)/\(searchTerm)?limit=40&apikey=\(key)"
-        case .quote :
+        case .profile,
+             .quote :
             return "\(baseUrl)/\(searchMode.rawValue)/\(searchTerm)?apikey=\(key)"
         case .search :
             return "\(baseUrl)/BOGUS"

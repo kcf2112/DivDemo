@@ -24,6 +24,7 @@ class SecurityListViewModel : ObservableObject {
     
     init() {
         getSecurities()
+        
     }
     
     func add( symbol: String, dollarAmount: Int ) {

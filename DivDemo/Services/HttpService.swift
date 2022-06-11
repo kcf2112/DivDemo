@@ -17,8 +17,10 @@ struct HttpService<T: Codable> {
 
     /*
      Returns the populated model object based on the decoded JSON data retrieved from the URL.
+     The default decoding strategy values are the usual Swift defaults.
      */
-    func getJSON() async throws -> T {
+    func getJSON( dateDecodingStrategy: JSONDecoder.DateDecodingStrategy = .deferredToDate,
+                  keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy = .useDefaultKeys ) async throws -> T {
         //  Verify the URL
         guard let url = URL( string: urlString ) else {
             throw APIError.invalidURL
@@ -37,8 +39,8 @@ struct HttpService<T: Codable> {
             }
             
             let decoder = JSONDecoder()
-            //decoder.dateDecodingStrategy = dateDecodingStrategy
-            //decoder.keyDecodingStrategy = keyDecodingStrategy
+            decoder.dateDecodingStrategy = dateDecodingStrategy
+            decoder.keyDecodingStrategy = keyDecodingStrategy
             
             //  Decode the JSON and return the populated model object
             do {
@@ -46,10 +48,12 @@ struct HttpService<T: Codable> {
                 return decodedData[0]
             }
             catch {
+                print( "HttpService decodingError: \( error.localizedDescription )" )
                 throw APIError.decodingError( error.localizedDescription )
             }
         }
         catch {
+            print( "HttpService dataTaskError: \( error.localizedDescription )" )
             throw APIError.dataTaskError( error.localizedDescription )
         }
     }

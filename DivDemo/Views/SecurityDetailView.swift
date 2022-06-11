@@ -11,11 +11,18 @@ struct SecurityDetailView: View {
     var security: Security
     
     var body: some View {
-        VStack( alignment: .leading ) {
-            QuoteDetailView( security: security )
-            DividendTTMView( security: security )
+        NavigationView {
+            VStack( alignment: .leading ) {
+                QuoteDetailView( security: security )
+                DividendTTMView( security: security )
+            }
+            .padding()
+            .navigationBarItems(
+                trailing: NavigationLink(
+                    "Profile",
+                    destination: ProfileView( security: security ) ) )
+
         }
-        .padding()
     }
     
     init( security: Security ) {

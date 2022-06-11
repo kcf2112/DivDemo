@@ -31,6 +31,9 @@
 		5EDB8FFD2848363200383FC8 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDB8FFC2848363200383FC8 /* APIService.swift */; };
 		5EE22696282C6D4D003CF46F /* SecurityDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE22695282C6D4D003CF46F /* SecurityDetailView.swift */; };
 		5EE22698282C7236003CF46F /* DividendTTMView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE22697282C7236003CF46F /* DividendTTMView.swift */; };
+		5EEF83462852B5A700996048 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEF83452852B5A700996048 /* Profile.swift */; };
+		5EEF83482854052100996048 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEF83472854052100996048 /* ProfileViewModel.swift */; };
+		5EEF834A2854083600996048 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EEF83492854083600996048 /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +62,9 @@
 		5EDB8FFC2848363200383FC8 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		5EE22695282C6D4D003CF46F /* SecurityDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityDetailView.swift; sourceTree = "<group>"; };
 		5EE22697282C7236003CF46F /* DividendTTMView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividendTTMView.swift; sourceTree = "<group>"; };
+		5EEF83452852B5A700996048 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		5EEF83472854052100996048 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		5EEF83492854083600996048 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +128,7 @@
 				5E4EE944280C8B9000AEBF98 /* DividendQueryView.swift */,
 				5EE22695282C6D4D003CF46F /* SecurityDetailView.swift */,
 				5EE22697282C7236003CF46F /* DividendTTMView.swift */,
+				5EEF83492854083600996048 /* ProfileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -132,6 +139,7 @@
 				5E4EE940280C3F3C00AEBF98 /* SecurityListViewModel.swift */,
 				5E4EE942280C4AB200AEBF98 /* DividendViewModel.swift */,
 				5E39C08B2835CB9D00CEE905 /* QuoteViewModel.swift */,
+				5EEF83472854052100996048 /* ProfileViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -144,6 +152,7 @@
 				5E496E522801C79A00C61482 /* AvGlobalQuoteResponse.swift */,
 				5E4EE93828078CAC00AEBF98 /* Security.swift */,
 				5E4EE93C280AEE5B00AEBF98 /* AvCodingKeys.swift */,
+				5EEF83452852B5A700996048 /* Profile.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -249,13 +258,16 @@
 				5EE22696282C6D4D003CF46F /* SecurityDetailView.swift in Sources */,
 				5E27411627DE43CB00368784 /* ContentView.swift in Sources */,
 				5E88CC5B284974540049AAFF /* HttpService.swift in Sources */,
+				5EEF83462852B5A700996048 /* Profile.swift in Sources */,
 				5E4EE93928078CAC00AEBF98 /* Security.swift in Sources */,
 				5E39C08C2835CB9D00CEE905 /* QuoteViewModel.swift in Sources */,
 				5E496E4D27FF8A6800C61482 /* AlphavantageAPI.swift in Sources */,
 				5E95227D2807761D000E7571 /* AddView.swift in Sources */,
 				5E4EE943280C4AB200AEBF98 /* DividendViewModel.swift in Sources */,
 				5E4EE93D280AEE5B00AEBF98 /* AvCodingKeys.swift in Sources */,
+				5EEF834A2854083600996048 /* ProfileView.swift in Sources */,
 				5E27412927DE48F200368784 /* Quote.swift in Sources */,
+				5EEF83482854052100996048 /* ProfileViewModel.swift in Sources */,
 				5E27411427DE43CB00368784 /* DivDemoApp.swift in Sources */,
 				5E4EE945280C8B9000AEBF98 /* DividendQueryView.swift in Sources */,
 				5EB6279127F3CD6500ACAC55 /* DividendTTM.swift in Sources */,

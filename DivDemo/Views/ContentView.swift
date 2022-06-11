@@ -9,12 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @StateObject var securityListViewModel = SecurityListViewModel()
+    @StateObject var securityListVM = SecurityListViewModel()
 
     var body: some View {
         NavigationView {
             List {
-                ForEach( securityListViewModel.securities ) { sec in
+                ForEach( securityListVM.securities ) { sec in
                     NavigationLink {
                         SecurityDetailView( security: sec );
                     } label: {
@@ -31,12 +31,12 @@ struct ContentView: View {
             .navigationTitle( "Div Demo" )
             .navigationBarItems(
                 trailing: NavigationLink(
-                    "Add", destination: AddView( securityListViewModel: securityListViewModel ) ) )
+                    "Add", destination: AddView( securityListViewModel: securityListVM ) ) )
         }
     }
     
     func deleteItem( at indexSet: IndexSet ) {
-        securityListViewModel.delete( indexSet: indexSet )
+        securityListVM.delete( indexSet: indexSet )
     }
 }
 
