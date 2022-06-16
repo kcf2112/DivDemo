@@ -14,15 +14,20 @@ class QuoteViewModel : ObservableObject {
     
     func loadQuote( security: Security ) async {
         let targetUrl = FinancialModelingPrepAPI.quoteUrl( for: security.symbol )
-        print( "QuoteDetailView targetUrl: \(targetUrl)" )
         
         let httpService = HttpService<Quote>( urlString: targetUrl )
+        
         do {
             quote = try await httpService.getJSON()
         }
         catch {
-            // TODO: Post error for user
-            fatalError( "Could not retrieve DividendTTM data: \(error.localizedDescription)" );
+            if( error.localizedDescription == "cancelled" ) {
+                // Not a true retrieval error, a routine task cancellation
+            }
+            else {
+                print( "Could not retrieve Quote: \(error)" );
+            }
+            quote = Quote( symbol: "" )
         }
     }
     

@@ -26,8 +26,13 @@ class DividendViewModel : ObservableObject {
             divInfo = try await httpService.getJSON()
         }
         catch {
-            // TODO: Post error for user
-            fatalError( "Could not retrieve DividendTTM data: \(error.localizedDescription)" );
+            if( error.localizedDescription == "cancelled" ) {
+                // Not a true retrieval error, a routine task cancellation
+            }
+            else {
+                print( "Could not retrieve DividendTTM: \(error)" );
+            }
+            divInfo = DividendTTM()
         }
     }
 }

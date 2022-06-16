@@ -26,8 +26,13 @@ class ProfileViewModel : ObservableObject {
             profile = try await httpService.getJSON()
         }
         catch {
-            // TODO: Post error for user
-            fatalError( "Could not retrieve Profile data: \(error.localizedDescription)" );
+            if( error.localizedDescription == "cancelled" ) {
+                // Not a true retrieval error, a routine task cancellation
+            }
+            else {
+                print( "Could not retrieve Profile: \(error)" );
+            }
+            profile = Profile()
         }
     }
 }

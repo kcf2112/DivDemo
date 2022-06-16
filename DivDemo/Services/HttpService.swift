@@ -27,11 +27,8 @@ struct HttpService<T: Codable> {
         }
         
         do {
-            //  Create a request based on the URL
-            let request = URLRequest( url: url )
-            
             //  Make the call to the URL with the request
-            let (data, response) = try await URLSession.shared.data( for: request )
+            let (data, response) = try await URLSession.shared.data( from: url )
             
             //  Verify that the response is valid and the status code 200
             guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
@@ -53,8 +50,14 @@ struct HttpService<T: Codable> {
             }
         }
         catch {
-            print( "HttpService dataTaskError: \( error.localizedDescription )" )
-            throw APIError.dataTaskError( error.localizedDescription )
+            if let error = error as NSError?,
+               error.domain == NSURLErrorDomain && error.code == NSURLErrorCancelled {
+                // Not a true error condition, a view was refreshed so previous task was cancelled.
+            }
+            else {
+                print( "HttpService: Retrieval error: \(error)" )
+            }
+            throw APIError.decodingError( error.localizedDescription )
         }
     }
 }
