@@ -20,7 +20,7 @@ struct ProfileView: View {
                         Image( uiImage: image )
                             .resizable()
                             .scaledToFit()
-                            .frame( width: 250, height: 250 )
+                            .frame( width: 220, height: 220 )
                             //.frame( maxWidth: geom.size.width * 0.6 )
                             //.padding( .top )
                     }
@@ -40,7 +40,7 @@ struct ProfileView: View {
                             .frame( height: 2 )
                             //.foregroundColor( .lightBackground )
                             .padding( .vertical )
-                        Text( "Company Name" )
+                        Text( "Name" )
                             .font( .title.bold() )
                             .padding( .bottom, 5 )
                         Text( profileVM.profile.companyName )
@@ -49,7 +49,7 @@ struct ProfileView: View {
                             .frame( height: 2 )
                             //.foregroundColor( .lightBackground )
                             .padding( .vertical )
-                        Text( profileVM.profile.companyName )
+                        Text( profileVM.profile.description )
                     }
                     .padding( .horizontal )
                 }

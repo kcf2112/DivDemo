@@ -7,11 +7,11 @@
 
 import Foundation
 
-@MainActor
 class QuoteViewModel : ObservableObject {
     
     @Published var quote = Quote( symbol: "" )
     
+    @MainActor
     func loadQuote( security: Security ) async {
         let targetUrl = FinancialModelingPrepAPI.quoteUrl( for: security.symbol )
         
@@ -31,6 +31,7 @@ class QuoteViewModel : ObservableObject {
         }
     }
     
+    @MainActor
     func loadQuoteFromFile() async {
         let file = "basic_quote.json"
         

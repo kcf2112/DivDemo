@@ -7,11 +7,11 @@
 
 import Foundation
 
-@MainActor
 class DividendViewModel : ObservableObject {
     
     @Published var divInfo = DividendTTM()
     
+    @MainActor
     func loadDividend( security: Security ) async {
         
         // TODO:

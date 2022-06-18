@@ -29,12 +29,12 @@ class ProfileViewModel : ObservableObject {
             await retrieveImage( urlString: profile.image )
         }
         catch {
-            if( error.localizedDescription == "cancelled" ) {
+            if( error.localizedDescription.contains( "cancelled" ) ) {
                 // Not a true retrieval error, a routine task cancellation
-                print( "Profile data task cancelled: \(error)" );
+                print( "ProfileViewModel: Data task cancelled: \(error)" );
             }
             else {
-                print( "Could not retrieve profile data: \(error)" );
+                print( "ProfileViewModel: Could not retrieve profile data: \(error)" );
             }
             profile = Profile()
         }

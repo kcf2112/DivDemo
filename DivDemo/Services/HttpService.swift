@@ -53,15 +53,18 @@ struct HttpService<T: Codable> {
             }
         }
         catch {
+            var msg = "";
             if let error = error as NSError?,
                     error.domain == NSURLErrorDomain && error.code == NSURLErrorCancelled {
-                print( "HttpService: Retrieval error: \(error)" )
+                print( "HttpService: Task cancelled: \(error)" )
                 // Not a true error condition, a view was refreshed so previous task was cancelled.
+                msg = "The retrieval task was cancelled (not necessarily an error)"
             }
             else {
                 print( "HttpService: Retrieval error: \(error)" )
+                msg = error.localizedDescription
             }
-            throw APIError.decodingError( error.localizedDescription )
+            throw APIError.dataTaskError( msg )
         }
     }
 }
