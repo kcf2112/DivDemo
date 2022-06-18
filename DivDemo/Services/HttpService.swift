@@ -19,6 +19,7 @@ struct HttpService<T: Codable> {
      Returns the populated model object based on the decoded JSON data retrieved from the URL.
      The default decoding strategy values are the usual Swift defaults.
      */
+    @MainActor
     func getJSON( dateDecodingStrategy: JSONDecoder.DateDecodingStrategy = .deferredToDate,
                   keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy = .useDefaultKeys ) async throws -> T {
         //  Verify the URL
@@ -31,7 +32,9 @@ struct HttpService<T: Codable> {
             let (data, response) = try await URLSession.shared.data( from: url )
             
             //  Verify that the response is valid and the status code 200
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            guard
+                let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200
+            else {
                 throw APIError.invalidResponseStatus
             }
             
@@ -51,7 +54,8 @@ struct HttpService<T: Codable> {
         }
         catch {
             if let error = error as NSError?,
-               error.domain == NSURLErrorDomain && error.code == NSURLErrorCancelled {
+                    error.domain == NSURLErrorDomain && error.code == NSURLErrorCancelled {
+                print( "HttpService: Retrieval error: \(error)" )
                 // Not a true error condition, a view was refreshed so previous task was cancelled.
             }
             else {

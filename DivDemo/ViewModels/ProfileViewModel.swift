@@ -6,33 +6,47 @@
 //
 
 import Foundation
+import SwiftUI
 
-@MainActor
 class ProfileViewModel : ObservableObject {
     
     @Published var profile = Profile()
+    @Published var logoImage: UIImage? = nil
     
+    @MainActor
     func loadProfile( security: Security ) async {
-        
+        print( "ProfileViewModel loadProfile: Entry" )
+
         // TODO:
-        // @MainActor vs await MainActor.run( body: { <async code here> } )
-        //
+        // Research: @MainActor vs await MainActor.run( body: { <async code here> } )
         
         let targetUrl = FinancialModelingPrepAPI.profileUrl( for: security.symbol )
-        print( "ProfileViewModel targetUrl: \(targetUrl)" )
+        print( "ProfileViewModel loadProfile: targetUrl: \(targetUrl)" )
         
         let httpService = HttpService<Profile>( urlString: targetUrl )
         do {
             profile = try await httpService.getJSON()
+            await retrieveImage( urlString: profile.image )
         }
         catch {
             if( error.localizedDescription == "cancelled" ) {
                 // Not a true retrieval error, a routine task cancellation
+                print( "Profile data task cancelled: \(error)" );
             }
             else {
-                print( "Could not retrieve Profile: \(error)" );
+                print( "Could not retrieve profile data: \(error)" );
             }
             profile = Profile()
+        }
+    }
+    
+    @MainActor
+    func retrieveImage( urlString: String ) async {
+        print( "ProfileViewModel retrieveImage: Entry with image urlString \(urlString)" )
+
+        let imageService = ImageDownloadService()
+        if let image: UIImage = try? await imageService.download( urlString: urlString ) {
+            self.logoImage = image
         }
     }
 }

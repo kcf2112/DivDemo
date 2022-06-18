@@ -16,12 +16,14 @@ struct ProfileView: View {
         GeometryReader { geom in
             ScrollView {
                 VStack {
-                    Image( profileVM.profile.image )
-                        .resizable()
-                        .scaledToFit()
-                        .frame( maxWidth: geom.size.width * 0.6 )
-                        .padding( .top )
-                    
+                    if let image = profileVM.logoImage {
+                        Image( uiImage: image )
+                            .resizable()
+                            .scaledToFit()
+                            .frame( width: 250, height: 250 )
+                            //.frame( maxWidth: geom.size.width * 0.6 )
+                            //.padding( .top )
+                    }
                     // Divider()  // Barely visible, pretty much useless.
                      
                     VStack( alignment: .leading ) {
