@@ -20,9 +20,8 @@ struct ProfileView: View {
                         Image( uiImage: image )
                             .resizable()
                             .scaledToFit()
-                            .frame( width: 220, height: 220 )
+                            .frame( width: 120, height: 120 )
                             //.frame( maxWidth: geom.size.width * 0.6 )
-                            //.padding( .top )
                     }
                     // Divider()  // Barely visible, pretty much useless.
                      

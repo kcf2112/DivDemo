@@ -33,7 +33,8 @@ struct HttpService<T: Codable> {
             
             //  Verify that the response is valid and the status code 200
             guard
-                let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200
+                let httpResponse = response as? HTTPURLResponse,
+                    httpResponse.statusCode >= 200 && httpResponse.statusCode < 300
             else {
                 throw APIError.invalidResponseStatus
             }

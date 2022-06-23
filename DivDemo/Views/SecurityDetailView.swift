@@ -9,19 +9,32 @@ import SwiftUI
 
 struct SecurityDetailView: View {
     var security: Security
+    @State private var showingProfile = false
     
     var body: some View {
         NavigationView {
-            VStack( alignment: .leading ) {
+            VStack( /*alignment: .leading*/ ) {
+                
                 QuoteDetailView( security: security )
+                //Spacer()
                 DividendTTMView( security: security )
+                //Spacer()
+                
+                Button( action: {
+                    showingProfile = !showingProfile
+                }, label: {
+                    Text( "Profile" )
+                    .frame( width: 200, height: 40 )
+                    .foregroundColor( .white )
+                    .background( Color.blue )
+                    .cornerRadius( 12 )
+                    .padding()
+                } )
             }
             .padding()
-            .navigationBarItems(
-                trailing: NavigationLink(
-                    "Profile",
-                    destination: ProfileView( security: security ) ) )
-
+            .sheet( isPresented: $showingProfile ) {
+                ProfileView( security: security )
+            }
         }
     }
     
