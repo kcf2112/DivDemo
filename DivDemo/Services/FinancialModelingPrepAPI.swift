@@ -19,6 +19,7 @@ struct FinancialModelingPrepAPI {
     
     enum SearchFunction: String {
         case dividend = "key-metrics-ttm"
+        case historicalPrice = "historical-price-full"
         case profile = "profile"
         case quote = "quote"
         case search = "--SYMBOL_SEARCH--"
@@ -31,11 +32,24 @@ struct FinancialModelingPrepAPI {
         return urlBy( searchMode: .dividend, searchTerm: equitySymbol, dates: [] )
     }
     
-    static func dividendUrl_TEST( for equitySymbol: String, fromDate: Date, toDate: Date ) -> String {
+    static func dividendUrl_TEST( for equitySymbol: String,
+                                  fromDate: Date, toDate: Date ) -> String {
         var dateStr: [String] = []
         dateStr.append( dateFormat.string( from: fromDate ) )
         dateStr.append( dateFormat.string( from: toDate ) )
         return urlBy( searchMode: .dividend, searchTerm: equitySymbol, dates: dateStr )
+    }
+
+    /*
+     Query URL for historical price (one year ago) of a security.  To account for holidays and
+     weekends, we pull back five days' worth of data and take the oldest available.
+     */
+    static func historicalPriceUrl( for equitySymbol: String, 
+                                    fromDate: Date, toDate: Date ) -> String {
+        var dateStr: [String] = []
+        dateStr.append( dateFormat.string( from: fromDate ) )
+        dateStr.append( dateFormat.string( from: toDate ) )
+        return urlBy( searchMode: .historicalPrice, searchTerm: equitySymbol, dates: dateStr )
     }
 
     /*
@@ -61,11 +75,14 @@ struct FinancialModelingPrepAPI {
     
     /*
      Uses search mode (SearchFunction enum) to build the query URL.
+     If given, dates[0] is 'from' and dates[1] is 'to' (both inclusive.)
      */
     private static func urlBy( searchMode: SearchFunction, searchTerm: String, dates: [String] ) -> String {
         switch searchMode {
         case .dividend :
             return "\(baseUrl)/\(searchMode.rawValue)/\(searchTerm)?limit=40&apikey=\(key)"
+        case .historicalPrice :
+            return "\(baseUrl)/\(searchMode.rawValue)/\(searchTerm)?apikey=\(key)&from=\(dates[0])&to=\(dates[1])"
         case .profile,
              .quote :
             return "\(baseUrl)/\(searchMode.rawValue)/\(searchTerm)?apikey=\(key)"

@@ -11,21 +11,19 @@ struct DividendTTMView: View {
     //@State private var divData = [DivInfo]()
     @StateObject var divViewModel = DividendViewModel()
     
-    var div = DividendTTM()
-    
     var security: Security
     let longFmt = "%.6f"
     let shortFmt = "%.2f"
 
     var body: some View {
         Text( "\(security.symbol) Dividend Trailing 12 Months (TTM)" )
-            .font( .headline )
+            .font( .title3.bold() )
         List {
             VStack( alignment: .leading ) {
-                Text( "Dividend Yield TTM: \(divViewModel.divInfo.dividendYieldTTM, specifier: longFmt)" )
-                Text( "Dividend Yield % TTM: \(divViewModel.divInfo.dividendYieldPercentageTTM, specifier: longFmt)" )
-                Text( "Dividend PerShare TTM: \(divViewModel.divInfo.dividendPerShareTTM, specifier: longFmt)" )
-                //Text( "Dividend Total TTM: \(divViewModel.getDividendPaidTTM( shares: security.shares ), specifier: shortFmt)" )
+                Text( "Yield TTM: \(divViewModel.divInfo.dividendYieldTTM, specifier: longFmt)" )
+                Text( "Yield % TTM: \(divViewModel.divInfo.dividendYieldPercentageTTM, specifier: longFmt)" )
+                Text( "$ PerShare TTM: \(divViewModel.divInfo.dividendPerShareTTM, specifier: longFmt)" )
+                Text( "Dividend Total TTM: \(divViewModel.getDividendPaidTTM(dollarAmount: security.dollarAmount ), specifier: shortFmt)" ).font( .headline )
             }
         }
         .task {

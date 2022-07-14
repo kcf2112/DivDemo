@@ -13,6 +13,8 @@ struct DividendTTM : Codable {
     var dividendYieldPercentageTTM: Double = 0.0
     var dividendPerShareTTM: Double = 0.0
     
+    var historicalPrice: Double = 0.0
+    var historicalPriceDate: Date?
     var shares: Double = 0.0
     
     var formattedShares: String {
@@ -26,11 +28,7 @@ struct DividendTTM : Codable {
         case dividendYieldTTM = "dividendYieldTTM"
         case dividendYieldPercentageTTM = "dividendYieldPercentageTTM"
         case dividendPerShareTTM = "dividendPerShareTTM"
-    }
-    
-    func getDividendPaidTTM( shares: Double ) -> Double {
-        return shares * dividendPerShareTTM
-    }
+    }    
 }
 
 extension DividendTTM: Identifiable {

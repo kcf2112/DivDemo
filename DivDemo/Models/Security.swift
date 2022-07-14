@@ -14,5 +14,5 @@ struct Security : Identifiable, Codable {
     var id = UUID()
     var symbol: String
     var dollarAmount: Int
-    //var shares: Double
+    var shares: Double = 0
 }

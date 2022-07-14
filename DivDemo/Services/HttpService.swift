@@ -17,10 +17,12 @@ struct HttpService<T: Codable> {
 
     /*
      Returns the populated model object based on the decoded JSON data retrieved from the URL.
-     The default decoding strategy values are the usual Swift defaults.
+     The default decoding strategy values are the usual Swift defaults.  Most JSON returned
+     from the remote data is an array of objects, but not all.
      */
     @MainActor
-    func getJSON( dateDecodingStrategy: JSONDecoder.DateDecodingStrategy = .deferredToDate,
+    func getJSON( isJSONArray: Bool = true,
+                  dateDecodingStrategy: JSONDecoder.DateDecodingStrategy = .deferredToDate,
                   keyDecodingStrategy: JSONDecoder.KeyDecodingStrategy = .useDefaultKeys ) async throws -> T {
         //  Verify the URL
         guard let url = URL( string: urlString ) else {
@@ -43,13 +45,19 @@ struct HttpService<T: Codable> {
             decoder.dateDecodingStrategy = dateDecodingStrategy
             decoder.keyDecodingStrategy = keyDecodingStrategy
             
-            //  Decode the JSON and return the populated model object
+            // Decode the JSON and return the populated model object.  Need to know if the
+            // downloaded JSON is an array.
             do {
-                let decodedData = try decoder.decode( [T].self, from: data )
-                return decodedData[0]
+                if isJSONArray {
+                    let decoded = try decoder.decode( [T].self, from: data )
+                    return decoded[0]
+                }
+                else {
+                    let decoded = try decoder.decode( T.self, from: data )
+                    return decoded
+                }
             }
             catch {
-                print( "HttpService decodingError: \( error.localizedDescription )" )
                 throw APIError.decodingError( error.localizedDescription )
             }
         }
@@ -57,13 +65,11 @@ struct HttpService<T: Codable> {
             var msg = "";
             if let error = error as NSError?,
                     error.domain == NSURLErrorDomain && error.code == NSURLErrorCancelled {
-                print( "HttpService: Task cancelled: \(error)" )
                 // Not a true error condition, a view was refreshed so previous task was cancelled.
                 msg = "The retrieval task was cancelled (not necessarily an error)"
             }
             else {
-                print( "HttpService: Retrieval error: \(error)" )
-                msg = error.localizedDescription
+                 msg = error.localizedDescription
             }
             throw APIError.dataTaskError( msg )
         }

@@ -1,5 +1,5 @@
 //
-//  SymbolDetailView.swift
+//  SecurityDetailView.swift
 //  DivDemo
 //
 //  Created by Kevin Filer on 5/11/22.
